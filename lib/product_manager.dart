@@ -9,7 +9,7 @@ class ProductManager extends StatefulWidget {
   ProductManager({this.startingProduct}) {
     print('[Products Manager] Constructor');
   }
- 
+
   @override
   State<StatefulWidget> createState() {
     print('[Products Manager] createState()');
@@ -21,23 +21,29 @@ class _ProductManagerState extends State<ProductManager> {
   List<Map<String, String>> _products = [];
 
   @override
-    void initState() {
-      super.initState();
-      print('[Products Manager] initState');
-      if (widget.startingProduct != null) {
-        _products.add(widget.startingProduct);  
-      }
+  void initState() {
+    super.initState();
+    print('[Products Manager] initState');
+    if (widget.startingProduct != null) {
+      _products.add(widget.startingProduct);
     }
+  }
 
   @override
-    void didUpdateWidget(ProductManager oldWidget) {
-      print('[Products Manager] didUpdateWidget()');
-      super.didUpdateWidget(oldWidget);
-    }
+  void didUpdateWidget(ProductManager oldWidget) {
+    print('[Products Manager] didUpdateWidget()');
+    super.didUpdateWidget(oldWidget);
+  }
 
   void _addProduct(Map<String, String> product) {
     setState(() {
       _products.add(product);
+    });
+  }
+
+  void _deleteProduct(int index) {
+    setState(() {
+      _products.removeAt(index);
     });
   }
 
@@ -50,7 +56,7 @@ class _ProductManagerState extends State<ProductManager> {
           margin: EdgeInsets.all(10.0),
           child: ProductControl(_addProduct),
         ),
-        Expanded(child: Products(_products),)
+        Expanded(child: Products(_products, deleteProduct: _deleteProduct),),
       ],
     );
   }

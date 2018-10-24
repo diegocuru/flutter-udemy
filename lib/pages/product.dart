@@ -11,7 +11,7 @@ class ProductPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text('Product Detail'),
+          title: Text(title),
         ),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -19,14 +19,14 @@ class ProductPage extends StatelessWidget {
               Image.asset('assets/food.jpg'),
               Container(
                 padding: EdgeInsets.all(10.0),
-                child: Text('Details!'),
+                child: Text(title),
               ),
               Container(
                 padding: EdgeInsets.all(10.0),
                 child: RaisedButton(
                   color: Theme.of(context).accentColor,
-                  child: Text('BACK'),
-                  onPressed: () => Navigator.pop(context),
+                  child: Text('DELETE'),
+                  onPressed: () => Navigator.pop(context, true),
                 ),
               )
             ]));
