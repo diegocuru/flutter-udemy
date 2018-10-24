@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatelessWidget {
+  final String title;
+  final String imageUrl;
+
+  ProductPage(this.title, this.imageUrl);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
