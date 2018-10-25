@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './products.dart';
 import './product_create.dart';
-import './pdoruct_list.dart';
+import './product_list.dart';
 
 class ProductsAdminPage extends StatelessWidget {
   @override
@@ -16,10 +15,7 @@ class ProductsAdminPage extends StatelessWidget {
           ListTile(
             title: Text('Products'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => ProductsPage()));
+              Navigator.pushReplacementNamed(context, '/');
             },
           )
         ])),
