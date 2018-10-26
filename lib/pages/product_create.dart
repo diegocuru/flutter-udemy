@@ -60,13 +60,12 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             onPressed: () {
-              Map<String, dynamic> product = {
-                'title': _titleValue,
+              final Map<String, dynamic> product = {
+                'title': _titleValue,
                 'description': _descriptionValue,
                 'price': _priceValue,
-                'ímage': 'assets/food.jpg',
+                'image': 'assets/food.jpg',
               };
-              print(product.toString());
               widget.addProduct(product);
               Navigator.pushReplacementNamed(context, '/products');
             },

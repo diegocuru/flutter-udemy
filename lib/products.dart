@@ -9,18 +9,20 @@ class Products extends StatelessWidget {
 
   Widget _buildProductItem(BuildContext context, int index) {
     print(products[index]['title']);
+    print(products[index]['description']);
+    print(products[index]['image']);
+    print(products[index]['price']);
     return Card(
       child: Column(
         children: <Widget>[
-          //Image.asset(products[index]['image']),
-          Image.asset('assets/food.jpg'),
+          Image.asset(products[index]['image']),
           Container(
             padding: EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Chocolate',
+                  products[index]['title'],
                   style: TextStyle(
                       fontSize: 26.0,
                       fontWeight: FontWeight.bold,
@@ -48,12 +50,18 @@ class Products extends StatelessWidget {
                 ),
             child: Text('Union Square, San Francisco'),
           ),
-          //Text(products[index]['title']),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
-                child: Text('Details'),
+              IconButton(
+                icon: Icon(Icons.info),
+                color: Theme.of(context).accentColor,
+                onPressed: () => Navigator.pushNamed<bool>(
+                    context, '/product/' + index.toString()),
+              ),
+              IconButton(
+                icon: Icon(Icons.favorite_border),
+                color: Colors.red,
                 onPressed: () => Navigator.pushNamed<bool>(
                     context, '/product/' + index.toString()),
               ),
