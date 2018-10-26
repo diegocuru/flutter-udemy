@@ -17,24 +17,36 @@ class Products extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10.0),
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Chocolate',
-                    style: TextStyle(
-                        fontSize: 26.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Oswald'),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Chocolate',
+                  style: TextStyle(
+                      fontSize: 26.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Oswald'),
+                ),
+                SizedBox(width: 8.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).accentColor,
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: Text(
+                    '\$${products[index]['price'].toString()}',
+                    style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(width: 8.0),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-                    decoration:
-                        BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(5.0)),
-                    child: Text('\$${products[index]['price'].toString()}', style: TextStyle(color: Colors.white),),
-                  ),
-                ]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey, width: 1.0),
+                borderRadius: BorderRadius.circular(6.0),
+                ),
+            child: Text('Union Square, San Francisco'),
           ),
           //Text(products[index]['title']),
           ButtonBar(
