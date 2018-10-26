@@ -10,6 +10,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPage extends State<AuthPage> {
   String _emailValue;
   String _passwordValue;
+  bool _acceptTerms = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,18 @@ class _AuthPage extends State<AuthPage> {
                   _passwordValue = value;
                 });
               },
+            ),
+            SwitchListTile(
+              title: Text('Accept Terms'),
+              value: _acceptTerms,
+              onChanged: (bool value) {
+                setState(() {
+                  _acceptTerms = value;
+                });
+              },
+            ),
+            SizedBox(
+              height: 10.0,
             ),
             RaisedButton(
               child: Text('LOGIN'),
