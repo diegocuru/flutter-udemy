@@ -8,6 +8,7 @@ class Products extends StatelessWidget {
   }
 
   Widget _buildProductItem(BuildContext context, int index) {
+    print(products[index]['title']);
     return Card(
       child: Column(
         children: <Widget>[
@@ -15,10 +16,25 @@ class Products extends StatelessWidget {
           Image.asset('assets/food.jpg'),
           Container(
             padding: EdgeInsets.all(10.0),
-            child: Text(
-              'Chocolate',
-              style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'Oswald'),
-            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Chocolate',
+                    style: TextStyle(
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Oswald'),
+                  ),
+                  SizedBox(width: 8.0),
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                    decoration:
+                        BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(5.0)),
+                    child: Text('\$${products[index]['price'].toString()}', style: TextStyle(color: Colors.white),),
+                  ),
+                ]),
           ),
           //Text(products[index]['title']),
           ButtonBar(

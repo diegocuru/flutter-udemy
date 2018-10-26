@@ -26,9 +26,9 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             decoration: InputDecoration(
               labelText: 'Product title',
             ),
-            onChanged: (String value) {
+            onChanged: (String title) {
               setState(() {
-                _titleValue = value;
+                _titleValue = title;
               });
             },
           ),
@@ -37,9 +37,9 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
               labelText: 'Product description',
             ),
             maxLines: 4,
-            onChanged: (String value) {
+            onChanged: (String description) {
               setState(() {
-                _descriptionValue = value;
+                _descriptionValue = description;
               });
             },
           ),
@@ -48,9 +48,9 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
               labelText: 'Product price',
             ),
             keyboardType: TextInputType.number,
-            onChanged: (String value) {
+            onChanged: (String price) {
               setState(() {
-                _priceValue = double.parse(value);
+                _priceValue = double.parse(price);
               });
             },
           ),
@@ -60,12 +60,13 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             onPressed: () {
-              final Map<String, dynamic> product = {
+              Map<String, dynamic> product = {
                 'title': _titleValue,
                 'description': _descriptionValue,
                 'price': _priceValue,
-                'ímage': 'assets/food.jpg'
+                'ímage': 'assets/food.jpg',
               };
+              print(product.toString());
               widget.addProduct(product);
               Navigator.pushReplacementNamed(context, '/products');
             },
