@@ -8,9 +8,11 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPage extends State<AuthPage> {
-  String _emailValue;
-  String _passwordValue;
-  bool _acceptTerms = false;
+  final Map<String, dynamic> _formData = {
+    'email': null,
+    'password': null,
+    'acceptTerms': false,
+  };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   DecorationImage _buildBackgroundImage() {
@@ -38,7 +40,7 @@ class _AuthPage extends State<AuthPage> {
         fillColor: Colors.white,
       ),
       onSaved: (String value) {
-        _emailValue = value;
+        _formData['email'] = value;
       },
     );
   }
@@ -57,7 +59,7 @@ class _AuthPage extends State<AuthPage> {
       ),
       obscureText: true,
       onSaved: (String value) {
-        _passwordValue = value;
+        _formData['password'] = value;
       },
     );
   }
@@ -65,10 +67,10 @@ class _AuthPage extends State<AuthPage> {
   Widget _buildAcceptSwitchTile() {
     return SwitchListTile(
       title: const Text('Accept Terms'),
-      value: _acceptTerms,
+      value: _formData['acceptTerms'],
       onChanged: (bool value) {
         setState(() {
-          _acceptTerms = value;
+          _formData['acceptTerms'] = value;
         });
       },
     );
@@ -79,7 +81,6 @@ class _AuthPage extends State<AuthPage> {
       return;
     }
     _formKey.currentState.save();
-    print('User: ' + _emailValue + ', Password:' + _passwordValue);
     Navigator.pushReplacementNamed(context, '/products');
   }
 
