@@ -25,7 +25,9 @@ class _AuthPage extends State<AuthPage> {
   Widget _buildEmailTextField() {
     return TextFormField(
       validator: (String value) {
-        if (value.isEmpty || !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").hasMatch(value)) {
+        if (value.isEmpty ||
+            !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                .hasMatch(value)) {
           return 'Email field souldn\'t be empty and should be a valid email address';
         }
       },
@@ -60,9 +62,9 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-  Widget _buildAcceptSwitch() {
+  Widget _buildAcceptSwitchTile() {
     return SwitchListTile(
-      title: Text('Accept Terms'),
+      title: const Text('Accept Terms'),
       value: _acceptTerms,
       onChanged: (bool value) {
         setState(() {
@@ -106,7 +108,7 @@ class _AuthPage extends State<AuthPage> {
                     _buildEmailTextField(),
                     SizedBox(height: 8.0),
                     _buildPasswordTextField(),
-                    _buildAcceptSwitch(),
+                    _buildAcceptSwitchTile(),
                     SizedBox(
                       height: 10.0,
                     ),
