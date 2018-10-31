@@ -11,6 +11,29 @@ class ProductPage extends StatelessWidget {
   //ProductPage(this.title, this.imageUrl);
   ProductPage(this.product);
 
+  Widget _buildAddressPriceRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'Union Square, San Francisco',
+          style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 5.0),
+          child: Text(
+            '|',
+            style: TextStyle(color: Colors.grey),
+          ),
+        ),
+        Text(
+          '\$${product['price']}'.toString(),
+          style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -36,30 +59,14 @@ class ProductPage extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: TitleDefault(product['title']),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Union Square, San Francisco',
-                  style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Text(
-                    '|',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                Text(
-                  '\$${product['price']}'.toString(),
-                  style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
-                ),
-              ],
-            ),
+            _buildAddressPriceRow(),
             Container(
               padding: EdgeInsets.all(8.0),
               alignment: Alignment.center,
-              child: Text(product['description'], textAlign: TextAlign.center,),
+              child: Text(
+                product['description'],
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
