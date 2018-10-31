@@ -59,7 +59,8 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
   Widget _buildPriceTextField() {
     return TextFormField(
       validator: (String value) {
-        if (value.isEmpty || !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
+        if (value.isEmpty ||
+            !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
           return 'Price is required and should be a number.';
         }
       },
@@ -96,33 +97,38 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
 
-    return Container(
-      margin: EdgeInsets.all(10.0),
-      child: Form(
-        key: _formKey,
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: targetPadding / 2),
-          children: <Widget>[
-            _buildTitleTextField(),
-            _buildDescriptionTextField(),
-            _buildPriceTextField(),
-            SizedBox(
-              height: 15.0,
-            ),
-            RaisedButton(
-              child: Text('Save'),
-              textColor: Colors.white,
-              onPressed: _submitForm,
-            )
-            // GestureDetector(
-            //   onTap: _submitForm,
-            //   child: Container(
-            //     color: Colors.green,
-            //     padding: EdgeInsets.all(5.0),
-            //     child: Text('My Button'),
-            //   ),
-            // )
-          ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: targetPadding / 2),
+            children: <Widget>[
+              _buildTitleTextField(),
+              _buildDescriptionTextField(),
+              _buildPriceTextField(),
+              SizedBox(
+                height: 15.0,
+              ),
+              RaisedButton(
+                child: Text('Save'),
+                textColor: Colors.white,
+                onPressed: _submitForm,
+              )
+              // GestureDetector(
+              //   onTap: _submitForm,
+              //   child: Container(
+              //     color: Colors.green,
+              //     padding: EdgeInsets.all(5.0),
+              //     child: Text('My Button'),
+              //   ),
+              // )
+            ],
+          ),
         ),
       ),
     );
