@@ -11,6 +11,7 @@ class _AuthPage extends State<AuthPage> {
   String _emailValue;
   String _passwordValue;
   bool _acceptTerms = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   DecorationImage _buildBackgroundImage() {
     return DecorationImage(
@@ -22,33 +23,39 @@ class _AuthPage extends State<AuthPage> {
   }
 
   Widget _buildEmailTextField() {
-    return TextField(
+    return TextFormField(
+      validator: (String value) {
+        if (value.isEmpty || !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").hasMatch(value)) {
+          return 'Email field souldn\'t be empty and should be a valid email address';
+        }
+      },
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: 'E-Mail',
         filled: true,
         fillColor: Colors.white,
       ),
-      onChanged: (String value) {
-        setState(() {
-          _emailValue = value;
-        });
+      onSaved: (String value) {
+        _emailValue = value;
       },
     );
   }
 
   Widget _buildPasswordTextField() {
-    return TextField(
+    return TextFormField(
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Password field shouldn\'t be empty';
+        }
+      },
       decoration: InputDecoration(
         labelText: 'Password',
         filled: true,
         fillColor: Colors.white,
       ),
       obscureText: true,
-      onChanged: (String value) {
-        setState(() {
-          _passwordValue = value;
-        });
+      onSaved: (String value) {
+        _passwordValue = value;
       },
     );
   }
@@ -66,6 +73,10 @@ class _AuthPage extends State<AuthPage> {
   }
 
   void _submitForm() {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
     print('User: ' + _emailValue + ', Password:' + _passwordValue);
     Navigator.pushReplacementNamed(context, '/products');
   }
@@ -88,21 +99,24 @@ class _AuthPage extends State<AuthPage> {
           child: SingleChildScrollView(
             child: Container(
               width: targetWidth,
-              child: Column(
-                children: <Widget>[
-                  _buildEmailTextField(),
-                  SizedBox(height: 8.0),
-                  _buildPasswordTextField(),
-                  _buildAcceptSwitch(),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  RaisedButton(
-                    child: Text('LOGIN'),
-                    textColor: Colors.white,
-                    onPressed: _submitForm,
-                  ),
-                ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    _buildEmailTextField(),
+                    SizedBox(height: 8.0),
+                    _buildPasswordTextField(),
+                    _buildAcceptSwitch(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    RaisedButton(
+                      child: Text('LOGIN'),
+                      textColor: Colors.white,
+                      onPressed: _submitForm,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
