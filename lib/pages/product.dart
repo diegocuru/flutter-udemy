@@ -2,9 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../widgets/ui_elements/title_default.dart';
+import '../models/product.dart';
 
 class ProductPage extends StatelessWidget {
-  final Map<String, dynamic> product;
+  final Product product;
   //final String title;
   //final String imageUrl;
 
@@ -27,7 +28,7 @@ class ProductPage extends StatelessWidget {
           ),
         ),
         Text(
-          '\$${product['price']}'.toString(),
+          '\$${product.price}'.toString(),
           style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
         ),
       ],
@@ -45,7 +46,7 @@ class ProductPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            product['title'],
+            product.title,
           ),
         ),
         body: Column(
@@ -53,18 +54,18 @@ class ProductPage extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: EdgeInsets.all(8.0),
-              child: Image.asset(product['image']),
+              child: Image.asset(product.image),
             ),
             Container(
               padding: EdgeInsets.all(10.0),
-              child: TitleDefault(product['title']),
+              child: TitleDefault(product.title),
             ),
             _buildAddressPriceRow(),
             Container(
               padding: EdgeInsets.all(8.0),
               alignment: Alignment.center,
               child: Text(
-                product['description'],
+                product.description,
                 textAlign: TextAlign.center,
               ),
             ),
