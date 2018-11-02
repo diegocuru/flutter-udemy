@@ -4,8 +4,9 @@ class ProductEditPage extends StatefulWidget {
   final Function addProduct;
   final Function updateProduct;
   final Map<String, dynamic> product;
+  final int productIndex;
 
-  ProductEditPage({this.addProduct, this.updateProduct, this.product});
+  ProductEditPage({this.addProduct, this.updateProduct, this.product, this.productIndex});
 
   @override
   State<StatefulWidget> createState() {
@@ -25,6 +26,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           return 'Title is required and should be 5+ characters long';
         }
       },
+      initialValue: widget.product == null ? '' : widget.product['title'],
       decoration: InputDecoration(
         labelText: 'Product title',
       ),
@@ -42,6 +44,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           return 'Title is required and should be 10+ characters long';
         }
       },
+      initialValue: widget.product == null ? '' : widget.product['description'],
       decoration: InputDecoration(
         labelText: 'Product description',
       ),
@@ -60,6 +63,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           return 'Price is required and should be a number.';
         }
       },
+      initialValue: widget.product == null ? '' : widget.product['price'].toString(),
       decoration: InputDecoration(
         labelText: 'Product price',
       ),
@@ -75,7 +79,11 @@ class _ProductEditPageState extends State<ProductEditPage> {
       return;
     }
     _formKey.currentState.save();
-    widget.addProduct(_formData);
+    if (widget.product == null) {
+      widget.addProduct(_formData);
+    } else {
+      widget.updateProduct(widget.productIndex, _formData);
+    }
     Navigator.pushReplacementNamed(context, '/products');
   }
 
@@ -84,8 +92,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
-
-    return GestureDetector(
+    final Widget pageContent = GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
@@ -120,5 +127,6 @@ class _ProductEditPageState extends State<ProductEditPage> {
         ),
       ),
     );
+    return  widget.product == null ? pageContent : Scaffold(appBar: AppBar(title: Text('Edit Product'),), body: pageContent,);
   }
 }
