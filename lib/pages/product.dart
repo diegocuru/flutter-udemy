@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import '../widgets/ui_elements/title_default.dart';
 import '../models/product.dart';
+import '../scoped-models/products.dart';
 
 class ProductPage extends StatelessWidget {
-  final Product product;
-  //final String title;
-  //final String imageUrl;
+  final int productIndex;
 
-  //ProductPage(this.title, this.imageUrl);
-  ProductPage(this.product);
+  ProductPage(this.productIndex);
 
-  Widget _buildAddressPriceRow() {
+  Widget _buildAddressPriceRow(Product product) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -43,7 +42,9 @@ class ProductPage extends StatelessWidget {
         Navigator.pop(context, false);
         return Future.value(false);
       },
-      child: Scaffold(
+      child: ScopedModelDescendant(builder: (BuildContext context, Widget child, ProductsModel model){
+        final Product product = model.products[productIndex];
+        return Scaffold(
         appBar: AppBar(
           title: Text(
             product.title,
@@ -60,7 +61,7 @@ class ProductPage extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: TitleDefault(product.title),
             ),
-            _buildAddressPriceRow(),
+            _buildAddressPriceRow(product),
             Container(
               padding: EdgeInsets.all(8.0),
               alignment: Alignment.center,
@@ -71,7 +72,8 @@ class ProductPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      );
+      }),
     );
   }
 }
